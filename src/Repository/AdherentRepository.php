@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Achat;
 use App\Entity\Adherent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,16 @@ class AdherentRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByIdWithAchat(string $id): ?Adherent {
+        return $this->createQueryBuilder('adherent')
+            ->select('adherent', 'achat')
+            ->leftJoin('adherent.achats', 'achat')
+            ->where('adherent.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
 //    /**

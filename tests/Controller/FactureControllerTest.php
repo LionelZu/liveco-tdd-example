@@ -63,7 +63,6 @@ class FactureControllerTest extends WebTestCase
 
         // When
         $this->client->request('GET', '/invoices', [
-            'begin' => '2022-12-01',
             'adherent' => 'ADH-1'
         ]);
         $response = $this->client->getResponse();
@@ -112,7 +111,6 @@ class FactureControllerTest extends WebTestCase
 
         // When
         $this->client->request('GET', '/invoices', [
-            'begin' => '2022-12-01',
             'adherent' => 'ADH-2'
         ]);
         $response = $this->client->getResponse();
@@ -162,7 +160,6 @@ class FactureControllerTest extends WebTestCase
 
         // When
         $this->client->request('GET', '/invoices', [
-            'begin' => '2022-12-01',
             'adherent' => 'ADH-2'
         ]);
         $response = $this->client->getResponse();
@@ -186,7 +183,6 @@ class FactureControllerTest extends WebTestCase
     {
         // When
         $this->client->request('GET', '/invoices', [
-            'begin' => '2022-12-01',
             'adherent' => 'ADH-1'
         ]);
 
@@ -197,22 +193,11 @@ class FactureControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function invoices_shouldReturnError_whenBeginDateIsAbsent(): void
+    public function invoices_shouldReturnError_whenAdherentIsAbsent(): void
     {
         $this->client->request('GET', '/invoices', []);
 
         $this->assertResponseStatusCodeSame(400, 'Incorrect parameters');
     }
 
-    /**
-     * @test
-     */
-    public function invoices_shouldReturnError_whenBeginDateIsIncorrect(): void
-    {
-        $this->client->request('GET', '/invoices', [
-            'begin' => 'undefined'
-        ]);
-
-        $this->assertResponseStatusCodeSame(400, 'Incorrect parameters');
-    }
 }

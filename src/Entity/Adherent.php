@@ -94,4 +94,23 @@ class Adherent
 
         return $this;
     }
+
+    public function computeTotal(): float
+    {
+        $total = 0;
+        foreach ($this->achats as &$achat) {
+            $total = $total + $achat->getCurrentPrice() * $achat->getQuantity();
+        }
+        return $total;
+    }
+
+
+    public function computeNegociateTotal(): float
+    {
+        $total = 0;
+        foreach ($this->achats as &$achat) {
+            $total = $total + $achat->getNegociatePrice() * $achat->getQuantity();
+        }
+        return $total;
+    }
 }
