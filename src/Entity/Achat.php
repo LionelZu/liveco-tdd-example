@@ -18,10 +18,10 @@ class Achat
     private ?string $codeProduit = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?float $currentPrice = null;
+    private ?string $currentPrice = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?float $negociatePrice = null;
+    private ?string $negociatePrice = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
     private ?int $quantity = null;
@@ -47,24 +47,24 @@ class Achat
         return $this;
     }
 
-    public function getCurrentPrice(): ?float
+    public function getCurrentPrice(): ?string
     {
         return $this->currentPrice;
     }
 
-    public function setCurrentPrice(float $currentPrice): self
+    public function setCurrentPrice(string $currentPrice): self
     {
         $this->currentPrice = $currentPrice;
 
         return $this;
     }
 
-    public function getNegociatePrice(): ?float
+    public function getNegociatePrice(): ?string
     {
         return $this->negociatePrice;
     }
 
-    public function setNegociatePrice(float $negociatePrice): self
+    public function setNegociatePrice(string $negociatePrice): self
     {
         $this->negociatePrice = $negociatePrice;
 

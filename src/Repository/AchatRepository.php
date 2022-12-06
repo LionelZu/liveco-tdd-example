@@ -40,9 +40,13 @@ class AchatRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByAdherent(Adherent $adherent) {
-        return $this->findBy(['adherent' => $adherent]);
-    }
+
+
+
+    
+    // public function findByAdherent(Adherent $adherent) {
+    //     return $this->findBy(['adherent' => $adherent]);
+    // }
 
 //    /**
 //     * @return Achat[] Returns an array of Achat objects

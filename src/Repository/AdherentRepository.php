@@ -40,16 +40,20 @@ class AdherentRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByIdWithAchat(string $id): ?Adherent {
-        return $this->createQueryBuilder('adherent')
-            ->select('adherent', 'achat')
-            ->leftJoin('adherent.achats', 'achat')
-            ->where('adherent.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 
+
+
+    
+
+    // public function findByIdWithAchat(string $id): ?Adherent {
+    //     return $this->createQueryBuilder('adherent')
+    //         ->select('adherent', 'achat')
+    //         ->leftJoin('adherent.achats', 'achat')
+    //         ->where('adherent.id = :id')
+    //         ->setParameter('id', $id)
+    //         ->getQuery()
+    //         ->getOneOrNullResult();
+    // }
 //    /**
 //     * @return Adherent[] Returns an array of Adherent objects
 //     */

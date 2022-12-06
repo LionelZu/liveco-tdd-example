@@ -21,6 +21,23 @@ class FactureController extends AbstractController
     public function index(Request $request, ValidatorInterface $validator, AdherentRepository $adherentRepo, AchatRepository $achatRepository, CotisationService $cotisationService): JsonResponse
     {
         $codeAdherent = $request->get('adherent');
+
+        if($result = $this->validateCodeAdherent($validator, $codeAdherent)) {
+            return $result;
+        }
+
+        if(($adherent = $adherentRepo->findByIdWithAchat($codeAdherent)) == null) {
+            return $this->json('Adherent not found', 404);
+        }
+
+        $total = $adherent->computeTotal();
+        $negociateTotal = $adherent->computeNegociateTotal();
+        $cotisation = $cotisationService->compute($adherent, $negociateTotal);
+
+        return $this->json(new EtudeDto($total, $negociateTotal, $cotisation));
+    }
+
+    private function validateCodeAdherent(ValidatorInterface $validator, ?string $codeAdherent) {
         $errors = $validator->validate(
             $codeAdherent, 
             [ new NotBlank() ]
@@ -29,17 +46,5 @@ class FactureController extends AbstractController
         if (count($errors) > 0) {    
             return $this->json($errors, 400);
         }
-        
-        $adherent = $adherentRepo->findByIdWithAchat($codeAdherent);
-
-        if($adherent == null) {
-            return $this->json('Adherent not found', 404);
-        }
-
-        $total = $adherent->computeTotal();
-        $negociateTotal = $adherent->computeNegociateTotal();
-        $cotisation = $cotisationService->compute($adherent, $total);
-
-        return $this->json(new EtudeDto($total, $negociateTotal, $cotisation));
     }
 }
