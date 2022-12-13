@@ -1,5 +1,14 @@
 # LiveCoding TDD
 
+Dans les commandes ci-dessous, les alias suivants sont utilisés :
+
+```
+alias composer="php composer.phar"
+alias symf="symfony"
+alias console="php bin/console"
+alias phpunit="php bin/phpunit"
+```
+
 ## Generateur
 
 - `console make:entity` : Génére une nouvelle entité
